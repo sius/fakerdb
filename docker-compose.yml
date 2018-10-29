@@ -1,0 +1,29 @@
+postgres:
+  container_name: faker_pg
+  image: postgres
+  ports:
+    - "5432:5432"
+  environment:
+    - ENV=development
+    - POSTGRES_DB=fakerdb
+    - POSTGRES_USER=faker
+    - POSTGRES_PASSWORD=faker
+
+mongo:
+  container_name: faker_mongodb
+  image: mongo
+  ports:
+    - "27017:27017"
+  environment:
+    - ENV=development
+
+mssql:
+  container_name: faker_mssql
+  image: mcr.microsoft.com/mssql/server
+  ports:
+    - "1433:1433"
+  environment:
+    - ENV=development
+    - ACCEPT_EULA=Y
+    - SA_PASSWORD=Faker123
+    - MSSQL_PID=Developer

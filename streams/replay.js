@@ -1,0 +1,44 @@
+/**
+ * readable stream: replay file or object n times
+ */
+var { Readable } = require('stream')
+  , CachedFs = require('cachedfs')
+  , fs = new CachedFs();
+
+module.exports = function(schema, options = null) {
+
+  let n = options['replay'] || 1;
+
+  if (typeof(schema) === 'string') {
+    return new Readable({
+      read(size) {
+        if (0 < n--) {
+          fs.readFile(schema, (err, data) => {
+            if (err) {
+              console.error(err)
+              return this.push(null)
+            }
+            this.push(data);
+          });
+        } else {
+          this.push(null);
+        }
+      }
+    })
+  } else if (typeof(schema) === 'object') {
+    return new Readable({
+      read(size) {
+        if (0 < n--) {
+          this.push(JSON.stringify(schema));
+          if (n == 0) {
+            this.push(null);
+          }
+        } else {
+          this.push(null);
+        }
+      }
+    })
+  } else {
+    throw `fo: argument type '${typeof(schema)}' not supported`;
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "fakerdb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bluebird": "^3.5.2",
+    "cachedfs": "^0.3.3",
+    "chance": "^1.0.16",
+    "cli-progress": "^2.1.0",
+    "colors": "^1.3.2",
+    "elasticsearch": "^15.1.1",
+    "faker": "^4.1.0",
+    "json-schema-faker": "^0.5.0-rc16",
+    "knex": "^0.15.2",
+    "mongodb": "^3.1.8",
+    "mssql": "^4.1.0",
+    "mysql": "^2.16.0",
+    "nedb": "^1.8.0",
+    "pg": "^7.5.0",
+    "sqlite3": "^4.0.3",
+    "tedious": "^2.2.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "mocha --exit --timeout 1200000 ./test/**/*.spec.js",
+    "migrate": "knex migrate:latest --knexfile ./knex/knexfile.js",
+    "rollback": "knex migrate:rollback --knexfile ./knex/knexfile.js"
+  },
+  "bin": {
+    "fakerdb": "bin/fakerdb.js"
+  },
+  "author": "sius",
+  "license": "MIT"
+}
