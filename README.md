@@ -90,7 +90,7 @@ replay(SCHEMA_FILE, { replay: 2 })
 
 ```
 
-### Stream to File (faker.db) with nedb
+### Stream to File with nedb
 
 ```javascript
 var { replay, jsft, insert, progress } = require('../streams')
@@ -112,6 +112,7 @@ replay(SCHEMA, OPTS)
   .pipe(progress(OPTS));
 
 ```
+
 ### Stream to database
 
 - [PostgreSQL](./examples/faker-pg.js)
