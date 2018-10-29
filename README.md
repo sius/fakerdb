@@ -93,23 +93,16 @@ replay(SCHEMA_FILE, { replay: 2 })
 ```javascript
 // examples/faker-nedb.js
 
-var { replay, jsft, insert, progress } = require('../streams')
+let fakerdb = require('../')
 , Datasource = require('nedb')
 , db = new Datasource({ filename: 'faker.db', autoload: true })
-, faker = require('faker')
-, jsf = require('json-schema-faker')
 , path = require('path');
 
-jsf.extend('faker', () => faker);
-
-const REPLAY = 1000000;
+const REPLAY = 1000;
 const SCHEMA  = path.join(__dirname, './schema/person.json');
 const OPTS = { replay: REPLAY, insert: { blockSize: 1000 } };
 
-replay(SCHEMA, OPTS)
-  .pipe(jsft(jsf))
-  .pipe(insert(db, OPTS))
-  .pipe(progress(OPTS));
+fakerdb(db, SCHEMA, OPTS);
 ```
 
 ### Stream to database
@@ -117,6 +110,10 @@ replay(SCHEMA, OPTS)
 - [PostgreSQL](./examples/faker-pg.js)
 - [MongoDb](./examples/faker-mongodb.js)
 
+
+### Custom json-schema-faker
+
+TODO
 
 ## CLI
 
