@@ -51,13 +51,12 @@ JSON schema
 ![insert 1.000.000 generated person records](./docs/fakerdb-test-10_7.png)
 
 
-## Usage
+## API Usage
 
 ###  Stream to STDOUT
 
 ```javascript
 // examples/faker-stdout.js
-
 
 var { replay, jsft } = require('../streams')
 , faker = require('faker')
@@ -87,12 +86,13 @@ const SCHEMA_FILE = path.join(__dirname, './schema/person.json');
 replay(SCHEMA_FILE, { replay: 2 })
     .pipe(jsft(jsf))
     .pipe(process.stdout);
-
 ```
 
-### Stream to File with nedb
+### Stream to file with nedb
 
 ```javascript
+// examples/faker-nedb.js
+
 var { replay, jsft, insert, progress } = require('../streams')
 , Datasource = require('nedb')
 , db = new Datasource({ filename: 'faker.db', autoload: true })
@@ -110,10 +110,14 @@ replay(SCHEMA, OPTS)
   .pipe(jsft(jsf))
   .pipe(insert(db, OPTS))
   .pipe(progress(OPTS));
-
 ```
 
 ### Stream to database
 
 - [PostgreSQL](./examples/faker-pg.js)
 - [MongoDb](./examples/faker-mongodb.js)
+
+
+## CLI
+
+TODO
