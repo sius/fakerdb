@@ -112,7 +112,7 @@ replay(SCHEMA, OPTS)
   .pipe(progress(OPTS));
 
 ```
-### [Stream to database]
+### Stream to database
 
 - [PostgreSQL](./examples/faker-pg.js)
 - [MongoDb](./examples/faker-mongodb.js)
