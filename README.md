@@ -58,12 +58,12 @@ JSON schema
 ```javascript
 // examples/faker-stdout.js
 
-var { replay, jsft } = require('../streams')
+var { replay, jsf} = require('../')
 , faker = require('faker')
-, jsf = require('json-schema-faker')
+, jsonSchemaFaker = require('json-schema-faker')
 , path = require('path');
 
-jsf.extend('faker', () => faker);
+jsonSchemaFaker.extend('faker', () => faker);
 
 const SCHEMA_OBJ = {
   type: 'object',
@@ -79,13 +79,14 @@ const SCHEMA_OBJ = {
 };
 
 replay(SCHEMA_OBJ, { replay: 2 })
-  .pipe(jsft(jsf))
+  .pipe(jsf(jsonSchemaFaker))
   .pipe(process.stdout);
 
 const SCHEMA_FILE = path.join(__dirname, './schema/person.json');
 replay(SCHEMA_FILE, { replay: 2 })
-    .pipe(jsft(jsf))
+    .pipe(jsf(jsonSchemaFaker))
     .pipe(process.stdout);
+
 ```
 
 ### Stream to file with nedb
@@ -93,16 +94,16 @@ replay(SCHEMA_FILE, { replay: 2 })
 ```javascript
 // examples/faker-nedb.js
 
-let fakerdb = require('../')
-, Datasource = require('nedb')
-, db = new Datasource({ filename: 'faker.db', autoload: true })
-, path = require('path');
+let { generate }  = require('../')
+  , Datasource = require('nedb')
+  , db = new Datasource({ filename: 'faker.db', autoload: true })
+  , path = require('path');
 
 const REPLAY = 1000;
 const SCHEMA  = path.join(__dirname, './schema/person.json');
 const OPTS = { replay: REPLAY, insert: { blockSize: 1000 } };
 
-fakerdb(db, SCHEMA, OPTS);
+generate(db, SCHEMA, OPTS);
 ```
 
 ### Stream to database
