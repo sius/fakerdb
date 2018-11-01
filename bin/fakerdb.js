@@ -1,36 +1,68 @@
 #!/usr/bin/env node
 
-let { Chance } = require('chance')
-  , faker = require('faker')
-  , jsf = require('json-schema-faker')
-  , { replay, jsft, insert, progress } = require('./streams')
-  , { args } = require('args');
+let argv = require('yargs')
+  , path = require('path');
 
-args
-  .option('blockSize', 'The insert blockSize', 1)
-  .option('replay', 'The total number of schema instances to generate', 1)
-  .option('schema', 'The path to the JSON schema file')
-  .option('jsf', 'The path to the JSON schema faker javascript file')
-  .option('file', 'The filename where to write the generated JSON records', 'faker.db')
-  .option('client', '')
-  .option('connection', '')
-  .command('generate', 'Start the test data generation stream', ['g'])
-
-const flags = args.parse(process.argv)
-
-jsf.extend('faker', () => faker);
-jsf.extend('chance', () => new Chance());
-
-module.exports = function(db, schema, options = null, cb = null ) {
-  let _db = db;
-  let _opts = options || { replay: 1, insert: { blockSize: 100 } };
-  if (!db) {
-    const Datasource = require('nedb');
-    _db = new Datasource({ filename: 'faker.db', autoload: true })
-  }
-  
-  replay(schema, _opts)
-    .pipe(jsft(jsf))
-    .pipe(insert(_db, _opts))
-    .pipe(progress(_opts, cb));
-};
+argv
+  .option('block-size', {
+    alias: 'b',
+    describe: `The number of records to insert simultaneously.`,
+    default: 1
+  })
+  .option('client', {
+    alias: 'c',
+    describe: `Choose a database client.`,
+    choices: ['nedb', 'pg', 'mongodb', 'mssql'],
+    default: 'nedb'
+  })
+  .option('connection', {
+    alias: 'con',
+    describe: `The connection url (1) or path to JSON config file (2), e.g.:`,
+  })
+  .option('output', {
+    alias: 'o',
+    describe: `The out path where to write the generated JSON records.`,
+    default: 'faker.db'
+  })
+  .help('help')
+  .option('json-schema-faker', {
+    alias: 'jsf',
+    describe: `The path to a custom JSON schema faker javascript file.`
+  })
+  .option('knex-migrations', {
+    alias: 'migrations',
+    describe: `The knex migration folder.`,
+    default: './knex/migrations'
+  })
+  .option('mongodb-col-name', {
+    alias: 'col-name',
+    describe: `The MongoDb collection name.`,
+    default: 'records'
+  })
+  .option('progress-bar-color', {
+    alias: 'color',
+    describe: `Choose a progress bar color.`,
+    choices: ['black', 'white', 'yellow', 'blue', 'cyan', 'gray', 'grey', 'red', 'magenta', 'green'],
+    default: 'green'
+  })
+  .option('replay', {
+    alias: 'r',
+    describe: `The total number of schema instances to generate.`,
+    default: 1
+  })
+  .option('schema', {
+    alias: 's',
+    describe: `The path to the JSON schema file.`
+  })
+  .option('table', {
+    alias: 't',
+    describe: `The relational table name.`
+  })
+  .coerce(['schema', 'json-schema-faker', 'output'], path.resolve)
+  .command(require('./cmds/generate'))
+  .demandCommand()
+  .wrap(80)
+  .epilog('For more information about json-schema-faker, find out README at https://github.com/json-schema-faker/json-schema-faker')
+  .example("fakerdb g -s person.json -r 1000 -b 100 -o people.db", `Generate 1.000 person records into the 'people.db' file,`)
+  .example("fakerdb g -s person.json -r 1000 -b 100 -con postgresql://my_db_user:my_db_password@localhost:5432/my_db", 'Generate 1.000 person records and write them to my_db')                                 
+  .argv;

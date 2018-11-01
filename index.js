@@ -1,24 +1,20 @@
 
-const { replay, jsft, insert, progress } = require('./streams');
+const { replay, jsf, insert, progress } = require('./streams');
 
-module.exports = function(db, schema, options = null, cb = null ) {
-  let _db = db;
-  if (!db) {
-    const Datasource = require('nedb');
-    _db = new Datasource({ filename: 'faker.db', autoload: true })
-  }
-  let _opts = options || { replay: 1, insert: { blockSize: 1 } };
-  let jsf = _opts.jsft;
-  if (!jsf) {
-    jsf = require('json-schema-faker')
-    let { Chance } = require('chance')
-      , faker = require('faker');
-    jsf.extend('faker', () => faker);
-    jsf.extend('chance', () => new Chance());
-  }
+function generate(db, schema, options = null, cb = null ) {
 
-  replay(schema, _opts)
-    .pipe(jsft(jsf))
-    .pipe(insert(_db, _opts))
-    .pipe(progress(_opts, cb));
+  let opts = options || { replay: 1, insert: { blockSize: 1 } };
+
+  replay(schema, opts)
+    .pipe(jsf(opts))
+    .pipe(insert(db, opts))
+    .pipe(progress(opts, cb));
+}
+
+module.exports = {
+  jsf: jsf,
+  replay: replay,
+  insert: insert,
+  progress: progress,
+  generate: generate
 };

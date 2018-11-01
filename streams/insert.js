@@ -16,6 +16,13 @@ function _isNedb(db) {
     && ('filename');
 }
 module.exports = function (db, options) {
+
+  if (!db) {
+    const Datasource = require('nedb');
+    let file = options ? options.filename || 'faker.db' : 'faker.db',
+    db = new Datasource({ filename: file, autoload: true })
+  }
+
   let blockSize = 1;
   if (options && options.insert) {
     blockSize = options.insert.blockSize || 1;

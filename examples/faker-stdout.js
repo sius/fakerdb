@@ -1,10 +1,10 @@
 
-var { replay, jsft } = require('../streams')
+var { replay, jsf} = require('../')
 , faker = require('faker')
-, jsf = require('json-schema-faker')
+, jsonSchemaFaker = require('json-schema-faker')
 , path = require('path');
 
-jsf.extend('faker', () => faker);
+jsonSchemaFaker.extend('faker', () => faker);
 
 const SCHEMA_OBJ = {
   type: 'object',
@@ -20,10 +20,10 @@ const SCHEMA_OBJ = {
 };
 
 replay(SCHEMA_OBJ, { replay: 2 })
-  .pipe(jsft(jsf))
+  .pipe(jsf(jsonSchemaFaker))
   .pipe(process.stdout);
 
 const SCHEMA_FILE = path.join(__dirname, './schema/person.json');
 replay(SCHEMA_FILE, { replay: 2 })
-    .pipe(jsft(jsf))
+    .pipe(jsf(jsonSchemaFaker))
     .pipe(process.stdout);

@@ -1,4 +1,4 @@
-faker.db
+*.db
 node_modules/
 
 # Logs

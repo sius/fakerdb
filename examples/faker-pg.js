@@ -1,4 +1,4 @@
-let fakerdb = require('../')
+let { generate } = require('../')
   , config = {
     client: 'pg',
     connection: 'postgresql://faker:faker@localhost:5432/fakerdb'
@@ -11,4 +11,4 @@ const SCHEMA  = path.join(__dirname, './schema/person.json');
 const OPTS = { replay: REPLAY, insert: { blockSize: 1000 } };
 
 knex.migrate.latest({ directory: './knex/migrations' })
-  .then( () => fakerdb(knex('person'), SCHEMA, OPTS) );
+  .then( () => generate(knex('person'), SCHEMA, OPTS) );

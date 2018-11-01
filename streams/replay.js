@@ -7,7 +7,10 @@ var { Readable } = require('stream')
 
 module.exports = function(schema, options = null) {
 
-  let n = options['replay'] || 1;
+  let n = 1;
+  if (options) {
+    n = options.replay || 1;
+  }
 
   if (typeof(schema) === 'string') {
     return new Readable({
@@ -39,6 +42,6 @@ module.exports = function(schema, options = null) {
       }
     })
   } else {
-    throw `fo: argument type '${typeof(schema)}' not supported`;
+    throw `schema: argument type '${typeof(schema)}' not supported`;
   }
 }

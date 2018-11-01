@@ -1,5 +1,5 @@
 module.exports = {
-  jsft: require('./jsft'),
+  jsf: require('./jsf'),
   replay: require('./replay'),
   insert: require('./insert'),
   progress: require('./progress')

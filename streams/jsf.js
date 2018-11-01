@@ -4,8 +4,17 @@
  */
 var { Transform } = require('stream');
 
-module.exports = function (jsf) {
+module.exports = function (options) {
 
+  let jsf = options ? options.jsf : null;
+  if (!jsf) {
+    jsf = require('json-schema-faker')
+    let { Chance } = require('chance')
+      , faker = require('faker');
+    jsf.extend('faker', () => faker);
+    jsf.extend('chance', () => new Chance());
+  }
+  
   return new Transform({
     readableObjectMode: true,
     writableObjectMode: true,

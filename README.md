@@ -117,4 +117,6 @@ TODO
 
 ## CLI
 
-TODO
+```console
+fakerdb --help
+```
