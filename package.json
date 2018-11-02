@@ -32,10 +32,10 @@
   "bin": {
     "fakerdb": "bin/fakerdb.js"
   },
-  "author": "sius",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/sius/fakerdb.git"
-  }
+  },
+  "author": "sius",
+  "license": "MIT"
 }
