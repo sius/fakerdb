@@ -6,7 +6,7 @@ exports.builder = (yargs) => { };
 exports.handler =  (argv) => {
     const options = {
       replay: argv.replay,
-      jsf: argv.jsf,
+      jsf: argv.jsf ? require(argv.jsf) : null,
       insert: {
         blockSize: argv.blockSize
       },
