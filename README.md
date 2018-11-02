@@ -17,6 +17,10 @@ docker-compose down
 ```
 ### Test Results and Performance
 
+**Test Environment**
+- Intel® Core™ i7-3520M CPU @ 2.90GHz × 4
+- 7.5 GiB
+- Linux 64 bit
 
 JSON schema
 
@@ -52,6 +56,11 @@ JSON schema
 
 
 ## API Usage
+
+Install
+```
+npm i fakerdb
+```
 
 ###  Stream to STDOUT
 
@@ -112,12 +121,9 @@ generate(db, SCHEMA, OPTS);
 - [MongoDb](./examples/faker-mongodb.js)
 
 
-### Custom json-schema-faker
-
-TODO
-
 ## CLI
 
 ```console
+npm i -g fakerdb
 fakerdb --help
 ```
