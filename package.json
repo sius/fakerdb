@@ -1,6 +1,6 @@
 {
   "name": "fakerdb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "dependencies": {
@@ -33,5 +33,9 @@
     "fakerdb": "bin/fakerdb.js"
   },
   "author": "sius",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sius/fakerdb.git"
+  }
 }
