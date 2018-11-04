@@ -42,16 +42,3 @@ exports.handler =  (argv) => {
       }
     }
   };
-
-
-  //   .option('connection', `The connection url (1) or path to JSON config file (2), e.g.: 
-//                                       (1) postgresql://my_db_user:my_db_password@localhost:5432/my_db
-//                                       (2) {
-//                                             host : 'localhost',
-//                                             user : 'my_db_user',
-//                                             password : 'my_db_password',
-//                                             database : 'my_db',
-//                                             port: 1433
-//                                             options: { encrypt: false }
-//                                           }
-//                           `)
