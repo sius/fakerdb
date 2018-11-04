@@ -55,9 +55,10 @@ describe("fakerdb should stream faker generated data into DB", () => {
         if(err) {
           return done(err);
         }
-        people = client.db().collection(mongodb_config.collection);
-        people.drop();
-        done();
+        people = client.db().collection(mongodb_config.collection,);
+        people.deleteMany({}, (o) => {
+          done();
+        });
       })
     });
 
