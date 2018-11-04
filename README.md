@@ -67,7 +67,7 @@ npm i fakerdb
 ```javascript
 // examples/faker-stdout.js
 
-var { replay, jsf} = require('../')
+var { replay, jsf } = require('fakerdb')
 , faker = require('faker')
 , jsonSchemaFaker = require('json-schema-faker')
 , path = require('path');
@@ -103,7 +103,7 @@ replay(SCHEMA_FILE, { replay: 2 })
 ```javascript
 // examples/faker-nedb.js
 
-let { generate }  = require('../')
+let { generate }  = require('fakerdb')
   , Datasource = require('nedb')
   , db = new Datasource({ filename: 'faker.db', autoload: true })
   , path = require('path');
