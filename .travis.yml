@@ -16,4 +16,4 @@ before_script:
   docker run -d -p 27017:27017 --name faker_mongo mongo
 
 script:
-  - npm test:travis
+  - npm run test:travis
