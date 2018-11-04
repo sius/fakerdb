@@ -1,7 +1,7 @@
 let { generate } = require('../')
   , config = {
     client: 'pg',
-    connection: 'postgresql://faker:faker@localhost:5432/fakerdb'
+    connection: 'postgresql://faker:faker@localhost:5000/fakerdb'
   }
   , knex = require('knex')(config)
   , path = require('path');

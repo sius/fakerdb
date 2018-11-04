@@ -8,7 +8,7 @@ module.exports = {
       database: 'fakerdb',
       user:     'faker',
       password: 'faker',
-      port: 5432
+      port: 5000
     },
     pool: {
       min: 2,
