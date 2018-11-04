@@ -9,10 +9,11 @@ services:
 
 before_script:
   # stop postgresql
-  - sudo service postgresql stop
+  # - sudo service postgresql stop
   # wait for postgresql to shutdown
-  - while sudo lsof -Pi :5432 -sTCP:LISTEN -t; do sleep 1; done
-  - docker-compose up -d
+  # - while sudo lsof -Pi :5432 -sTCP:LISTEN -t; do sleep 1; done
+  # - docker-compose up -d
+  docker run -d -p 27017:27017 --name faker_mongo mongo
 
 script:
-  - npm test
+  - npm test:travis

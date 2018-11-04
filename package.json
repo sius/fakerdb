@@ -26,6 +26,7 @@
   },
   "scripts": {
     "test": "mocha --exit --timeout 1200000 ./test/**/*.spec.js",
+    "test:travis": "mocha --exit --timeout 1200000 ./test/**/travis.spec.js",
     "migrate": "knex migrate:latest --knexfile ./knex/knexfile.js",
     "rollback": "knex migrate:rollback --knexfile ./knex/knexfile.js"
   },
