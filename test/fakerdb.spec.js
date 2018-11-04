@@ -77,7 +77,7 @@ describe("fakerdb should stream faker generated data into DB", () => {
   })
 
   describe('postgres', () => {
-
+    // DEFAULT PORT: 5432
     let pg_config = {
         client: 'pg',
         connection: 'postgresql://faker:faker@localhost:5000/fakerdb'

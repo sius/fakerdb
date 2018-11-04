@@ -2,7 +2,7 @@ postgres:
   container_name: faker_pg
   image: postgres
   ports:
-    - "127.0.0.1:5000:5432"
+    - "0.0.0.0:5000:5432"
   environment:
     - ENV=development
     - POSTGRES_DB=fakerdb
