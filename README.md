@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/sius/fakerdb.svg?branch=master)](https://travis-ci.com/sius/fakerdb)
+
 # fakerdb
 
 Generate an unlimited stream of JSON schema instances using [json-schema-faker](https://www.npmjs.com/package/json-schema-faker), [faker](https://www.npmjs.com/package/faker), [chance](https://www.npmjs.com/package/chance) and insert the data into a supported database, e.g.: [nedb](https://www.npmjs.com/package/nedb), [mongodb](https://www.npmjs.com/package/mongodb), [postgres](https://www.npmjs.com/package/pg), [mssql](https://www.npmjs.com/package/mssql).
