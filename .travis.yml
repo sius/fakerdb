@@ -1,0 +1,12 @@
+sudo: required
+
+language: node_js
+
+services:
+  - docker
+
+before_script:
+- docker-compose up -d
+
+script:
+- npm test
