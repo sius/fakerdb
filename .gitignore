@@ -1,5 +1,7 @@
 *.db
 node_modules/
+coverage/
+.nyc_output/
 
 # Logs
 logs
