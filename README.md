@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/sius/fakerdb.svg?branch=master)](https://travis-ci.com/sius/fakerdb)[![codecov](https://codecov.io/gh/sius/fakerdb/branch/master/graph/badge.svg)](https://codecov.io/gh/sius/fakerdb)[![dependencies Status](https://david-dm.org/sius/fakerdb/status.svg)](https://david-dm.org/sius/fakerdb)
+[![Build Status](https://travis-ci.com/sius/fakerdb.svg?branch=master)](https://travis-ci.com/sius/fakerdb)[![codecov](https://codecov.io/gh/sius/fakerdb/branch/master/graph/badge.svg)](https://codecov.io/gh/sius/fakerdb)[![dependencies Status](https://david-dm.org/sius/fakerdb/status.svg)](https://david-dm.org/sius/fakerdb)[![devDependencies Status](https://david-dm.org/sius/fakerdb/dev-status.svg)](https://david-dm.org/sius/fakerdb?type=dev)
 
 # fakerdb
 
