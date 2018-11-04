@@ -1,11 +1,9 @@
-const faker = require('faker')
-  var pd = require('probability-distributions');
+const pd = require('probability-distributions');
 
 function customFaker (numOfSamples) {
   let len = Math.abs(numOfSamples);
   let endIndex = len - 1;
   let currentIndex = -1;
-  let precomputedSamples = null;
   
   function PrecomputedSamples(numOfSamples) {
     this.numOfSamples = numOfSamples;
@@ -17,12 +15,11 @@ function customFaker (numOfSamples) {
     }
     this.init();
   }
+
+  let precomputedSamples = new PrecomputedSamples(len);
   
   let samples = {
     get next() {
-      if (currentIndex == -1) {
-        precomputedSamples = new PrecomputedSamples(len);
-      }
       if (currentIndex == endIndex) {
         currentIndex = -1;
       } 
