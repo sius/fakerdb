@@ -7,7 +7,7 @@ node_js:
 services:
   - docker
 
-before_install:
+before_script:
   # stop postgresql
   - sudo service postgresql stop
   # wait for postgresql to shutdown
