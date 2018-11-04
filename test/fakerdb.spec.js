@@ -76,34 +76,34 @@ describe("fakerdb should stream faker generated data into DB", () => {
     })
   })
 
-  describe('postgres', () => {
-    // DEFAULT PORT: 5432
-    let pg_config = {
-        client: 'pg',
-        connection: 'postgresql://faker:faker@localhost:5000/fakerdb'
-      }
-      , knex = require('knex')(pg_config)
+  // describe('postgres', () => {
+  //   // DEFAULT PORT: 5432
+  //   let pg_config = {
+  //       client: 'pg',
+  //       connection: 'postgresql://faker:faker@localhost:5000/fakerdb'
+  //     }
+  //     , knex = require('knex')(pg_config)
 
-    before('run migrations and delete records', done => {
+  //   before('run migrations and delete records', done => {
      
-      knex.migrate.latest({ directory: './knex/migrations' }).then(
-        value => {
-          knex('person').delete()
-            .then(numCounted => done())
-            .catch(err => Console.log(err));
-        });
-    })
+  //     knex.migrate.latest({ directory: './knex/migrations' }).then(
+  //       value => {
+  //         knex('person').delete()
+  //           .then(numCounted => done())
+  //           .catch(err => Console.log(err));
+  //       });
+  //   })
 
-    it(`should create ${TOTAL} records`, done => {
-      OPTS.progress.bar.color = 'blue';
-      generate(knex('person'), PERSON_SCHEMA, OPTS, () => {
-        knex('person').count().then( value => {
-          expect(parseInt(value[0].count)).to.equal(TOTAL);
-          done();
-        })
-      })
-    })
-  })     
+  //   it(`should create ${TOTAL} records`, done => {
+  //     OPTS.progress.bar.color = 'blue';
+  //     generate(knex('person'), PERSON_SCHEMA, OPTS, () => {
+  //       knex('person').count().then( value => {
+  //         expect(parseInt(value[0].count)).to.equal(TOTAL);
+  //         done();
+  //       })
+  //     })
+  //   })
+  // })     
   
   describe('mssql', () => {
     let mssql_config = {
