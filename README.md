@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.com/sius/fakerdb.svg?branch=master)](https://travis-ci.com/sius/fakerdb)
-
-[![codecov](https://codecov.io/gh/sius/fakerdb/branch/master/graph/badge.svg)](https://codecov.io/gh/sius/fakerdb)
+[![Build Status](https://travis-ci.com/sius/fakerdb.svg?branch=master)](https://travis-ci.com/sius/fakerdb)[![codecov](https://codecov.io/gh/sius/fakerdb/branch/master/graph/badge.svg)](https://codecov.io/gh/sius/fakerdb)
 
 # fakerdb
 
