@@ -38,7 +38,14 @@
     "url": "https://github.com/sius/fakerdb.git"
   },
   "keywords": [
-    "json", "jsonschema", "fake", "faker", "mocks", "testdata", "db", "stream"
+    "json",
+    "jsonschema",
+    "fake",
+    "faker",
+    "mocks",
+    "testdata",
+    "db",
+    "stream"
   ],
   "author": "sius",
   "license": "MIT"

@@ -13,7 +13,8 @@ before_script:
   # wait for postgresql to shutdown
   # - while sudo lsof -Pi :5432 -sTCP:LISTEN -t; do sleep 1; done
   # - docker-compose up -d
-  docker run -d -p 27017:27017 --name faker_mongo mongo
+  - docker run -d -p 27017:27017 --name faker_mongo mongo
+  - docker run -d -p 5432:5432 -e ENV=development -e POSTGRES_DB=fakerdb -e POSTGRES_USER=faker -e POSTGRES_PASSWORD=faker --name faker_pg postgres
 
 script:
   - npm run test:travis
