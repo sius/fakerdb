@@ -6,6 +6,19 @@ let generate = require('../').generate
 const TOTAL = 100;
 const BLOCK_SIZE = 10;
 const PERSON_SCHEMA = path.join(__dirname, '../examples/schema/person.json');
+const PERSON_OBJ = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+      faker: 'name.findName'
+    }
+  },
+  required: [
+    'name'
+  ]
+};
+
 const OPTS = {
   replay: TOTAL,
   jsf: null,
@@ -23,10 +36,24 @@ describe("fakerdb should stream faker generated data into DB", () => {
 
   describe('nedb', () => {
 
-    let Datasource = require('nedb')
-      , db = new Datasource();
-    
-    it(`should create ${OPTS.replay} records`, done => {
+    let Datasource = require('nedb'), db;
+
+    beforeEach('create new Datasource', done => {
+      db = new Datasource();
+      done();
+    });
+
+    it(`should create ${OPTS.replay} records with Person schema object`, done => {
+      OPTS.progress.bar.color = 'cyan';
+      generate(db, PERSON_OBJ, OPTS, () => {
+        db.count({}, (err, num) => {
+          expect(num).equals(OPTS.replay);
+          done();
+        })
+      })
+    })
+
+    it(`should create ${OPTS.replay} records with Person schema file`, done => {
       OPTS.progress.bar.color = 'green';
       generate(db, PERSON_SCHEMA, OPTS, () => {
         db.count({}, (err, num) => {
