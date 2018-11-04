@@ -120,10 +120,36 @@ generate(db, SCHEMA, OPTS);
 - [PostgreSQL](./examples/faker-pg.js)
 - [MongoDb](./examples/faker-mongodb.js)
 
+## fakerdb CLI
 
-## CLI
+### Use
 
 ```console
 npm i -g fakerdb
 fakerdb --help
 ```
+
+## Custom Faker Example
+
+### Create Standard Normal Distributed Samples
+
+- [JSON Schema Example](./examples/faker/person.json)
+- [Custom Faker Example](./examples/faker/custom.js)
+- [Custom Json Schema Faker](./examples/faker/custom-jsf.js)
+
+### Use
+```
+cd examples/faker
+fakerdb g -i person.json -o people.db --json-schema-faker custom-jsf.js -r 200000 -b 1000
+```
+
+# References
+- [json-schema-faker](https://www.npmjs.com/package/json-schema-faker)
+- [faker](https://www.npmjs.com/package/faker)
+- [chance](https://www.npmjs.com/package/chance)
+- [probability-distributions](https://www.npmjs.com/package/probability-distributions)
+- [nedb](https://www.npmjs.com/package/nedb)
+- [mongodb](https://www.npmjs.com/package/mongodb)
+- [knex](https://www.npmjs.com/package/knex)
+- [postgres](https://www.npmjs.com/package/pg)
+- [mssql](https://www.npmjs.com/package/mssql)

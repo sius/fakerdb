@@ -51,7 +51,7 @@ argv
     default: 1
   })
   .option('schema', {
-    alias: 's',
+    alias: ['s', 'i'],
     describe: `The path to the JSON schema file.`
   })
   .option('table', {
