@@ -102,4 +102,34 @@ describe("fakerdb should stream faker generated data into", () => {
       })
     })
   })
+
+
+  describe('postgres', () => {
+
+    let pg_config = {
+        client: 'pg',
+        connection: 'postgresql://postgres:@localhost:5432/fakerdb'
+      }
+      , knex = require('knex')(pg_config)
+
+    before('run migrations and delete records', done => {
+     
+      knex.migrate.latest({ directory: './knex/migrations' }).then(
+        value => {
+          knex('person').delete()
+            .then(numCounted => console.log(`${numCounted} records deleted.`), done())
+            .catch(err => console.log(err));
+        });
+    })
+
+    it(`should create ${TOTAL} records`, done => {
+      OPTS.progress.bar.color = 'blue';
+      generate(knex('person'), PERSON_SCHEMA, OPTS, () => {
+        knex('person').count().then( value => {
+          expect(parseInt(value[0].count)).to.equal(TOTAL);
+          done();
+        })
+      })
+    })
+  })  
 })
