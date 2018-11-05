@@ -62,6 +62,18 @@ describe("fakerdb should stream faker generated data into DB", () => {
         })
       })
     })
+
+    it(`should create ${OPTS.replay} records even if no db was provided`, done => {
+      OPTS.progress.bar.color = 'magenta';
+      generate(null, PERSON_SCHEMA, OPTS, () => {
+        const Datasource = require('nedb');
+        const db = new Datasource({ filename: 'faker.db', autoload: true })
+        db.count({}, (err, num) => {
+          expect(num).gte(OPTS.replay);
+          done();
+        })
+      })
+    })
   })
 
   describe('mongodb', () => {

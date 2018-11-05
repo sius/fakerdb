@@ -27,8 +27,8 @@
     "nyc": "^13.1.0"
   },
   "scripts": {
-    "test": "mocha --exit --timeout 1200000 ./test/**/*.spec.js",
-    "test:coverage": "nyc --reporter=text --reporter=lcov mocha --exit --timeout 1200000 ./test/**/*.spec.js",
+    "test": "mocha --exit --timeout 1200000 ./test/**/fakerdb.spec.js",
+    "test:coverage": "nyc --reporter=text --reporter=lcov mocha --exit --timeout 1200000 ./test/**/fakerdb.spec.js",
     "test:travis": "nyc --reporter=text --reporter=lcov mocha --exit --timeout 1200000 ./test/**/travis.spec.js && codecov -F fakerdb",
     "migrate": "knex migrate:latest --knexfile ./knex/knexfile.js",
     "rollback": "knex migrate:rollback --knexfile ./knex/knexfile.js"
