@@ -129,7 +129,7 @@ describe("fakerdb should stream faker generated data into", () => {
       knex.migrate.latest({ directory: './knex/migrations' }).then(
         value => {
           knex('person').delete()
-            .then(numCounted => console.log(`${numCounted} records deleted.`), done())
+            .then(numCounted => done())
             .catch(err => console.log(err));
         });
     })
