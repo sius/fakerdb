@@ -1,6 +1,7 @@
 
 let { generate } = require('../')
   , { Nedb, Mongodb, Knex } = require('../streams/db')
+  , { DbTransform } = require('../streams/db/dbTransform')
   , path = require('path')
   , { expect } = require('chai');
 
@@ -145,6 +146,52 @@ describe("fakerdb should stream faker generated data into", () => {
       })
     })
   })  
+})
+
+describe("End of stream", () => {
+
+  it('DbTransform Transformable should call insert if chunks not empty', done => {
+    let t =  new DbTransform({})
+    t.chunks=[{}];
+    t._flush(() => {
+      done()
+    })
+  })
+
+  it('DbTransform Transformable should stop if eos is reached', done => {
+    let t =  new DbTransform({})
+    t.insert(() => {
+      done()
+    });
+  })
+
+  it('DBTransform should stop if eos is reached', done => {
+    let t =  new DB({})
+    t.insert(() => {
+      done()
+    });
+  })
+
+  it('Nedb Transformable should stop if eos is reached', done => {
+    let t =  new Nedb({})
+    t.insert(() => {
+      done()
+    });
+  })
+
+  it('Mongodb Transformable should stop if eos is reached', done => {
+    let t =  new Mongodb({})
+    t.insert(() => {
+      done()
+    });
+  })
+
+  it('Knex Transformable should stop if eos is reached', done => {
+    let t =  new Knex({})
+    t.insert(() => {
+      done()
+    });
+  })
 })
 
 describe("Error handling", () => {
