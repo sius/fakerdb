@@ -1,5 +1,6 @@
 
-let generate = require('..').generate
+let { generate } = require('../')
+  , { Nedb, Mongodb, Knex } = require('../streams/db')
   , path = require('path')
   , { expect } = require('chai');
 
