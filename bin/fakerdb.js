@@ -26,7 +26,7 @@ argv
   })
   .help('help')
   .option('json-schema-faker', {
-    alias: 'jsf',
+    alias: ['jsf', 'f'],
     describe: `The path to a custom JSON schema faker javascript file.`
   })
   .option('knex-migrations', {

@@ -142,7 +142,7 @@ fakerdb --help
 ### Use
 ```
 cd examples/faker
-fakerdb g -i person.json -o people.db --json-schema-faker custom-jsf.js -r 200000 -b 1000
+fakerdb g -r 200000 -i person.json -f custom-jsf.js -b 1000 -o people.db 
 ```
 
 # References
