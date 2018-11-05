@@ -149,7 +149,7 @@ describe("fakerdb should stream faker generated data into", () => {
 
 describe("Error handling", () => {
 
-  it.only('Nedb Transformable should throw an error if the db object is invalid', done => {
+  it('Nedb Transformable should throw an error if the db object is invalid', done => {
     let t =  new Nedb({
       insert(chunks, cb) {
         cb(null, null);
@@ -162,7 +162,7 @@ describe("Error handling", () => {
     t.write('{}');
   })
 
-  it.only('Nedb Transformable should throw an error if the DB insert results in an error', done => {
+  it('Nedb Transformable should throw an error if the DB insert results in an error', done => {
     let t =  new Nedb({
       insert(chunks, cb) {
         cb('Connection error', null);
@@ -175,7 +175,7 @@ describe("Error handling", () => {
     t.write('{}');
   })
 
-  it.only('Mongodb Transformable should throw an error if the db object is invalid', done => {
+  it('Mongodb Transformable should throw an error if the db object is invalid', done => {
     let t =  new Mongodb({
       insertMany(chunks, cb) {
         cb(null, { ops: null });
@@ -188,7 +188,7 @@ describe("Error handling", () => {
     t.write('{}');
   })
 
-  it.only('Mongodb Transformable should throw an error if the DB insert results in an error', done => {
+  it('Mongodb Transformable should throw an error if the DB insert results in an error', done => {
     let t =  new Mongodb({
       insertMany(chunks, cb) {
         cb('Connection error', null);
@@ -201,7 +201,7 @@ describe("Error handling", () => {
     t.write('{}');
   })
 
-  it.only('Knex Transformable should throw an error if the db object is invalid', done => {
+  it('Knex Transformable should throw an error if the db object is invalid', done => {
     
     let t =  new Knex({
       insert(chunks) {
