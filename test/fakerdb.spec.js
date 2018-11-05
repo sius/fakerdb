@@ -117,7 +117,7 @@ describe("fakerdb should stream faker generated data into DB", () => {
         value => {
           knex('person').delete()
             .then(numCounted => done())
-            .catch(err => Console.log(err));
+            .catch(err => console.log(err));
         });
     })
 
