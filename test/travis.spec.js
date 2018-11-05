@@ -165,13 +165,6 @@ describe("End of stream", () => {
     });
   })
 
-  it('DBTransform should stop if eos is reached', done => {
-    let t =  new DB({})
-    t.insert(() => {
-      done()
-    });
-  })
-
   it('Nedb Transformable should stop if eos is reached', done => {
     let t =  new Nedb({})
     t.insert(() => {
