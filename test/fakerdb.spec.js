@@ -1,5 +1,6 @@
 
-let generate = require('../').generate
+let { generate } = require('../')
+  , { Nedb, Mongodb, Knex } = require('../streams/db')
   , path = require('path')
   , { expect } = require('chai');
 
@@ -182,3 +183,78 @@ describe("fakerdb should stream faker generated data into DB", () => {
     })
   })
 })
+
+describe("Error handling", () => {
+
+  it.only('Nedb Transformable should throw an error if the db object is invalid', done => {
+    let t =  new Nedb({
+      insert(chunks, cb) {
+        cb(null, null);
+      }
+    })
+    t.on('error', err => {
+      expect(err).equals('db not suppported!');
+      done();
+    });
+    t.write('{}');
+  })
+
+  it.only('Nedb Transformable should throw an error if the DB insert results in an error', done => {
+    let t =  new Nedb({
+      insert(chunks, cb) {
+        cb('Connection error', null);
+      }
+    })
+    t.on('error', err => {
+      expect(err).equals('Connection error');
+      done();
+    });
+    t.write('{}');
+  })
+
+  it.only('Mongodb Transformable should throw an error if the db object is invalid', done => {
+    let t =  new Mongodb({
+      insertMany(chunks, cb) {
+        cb(null, { ops: null });
+      }
+    })
+    t.on('error', err => {
+      expect(err).equals('db not suppported!');
+      done();
+    });
+    t.write('{}');
+  })
+
+  it.only('Mongodb Transformable should throw an error if the DB insert results in an error', done => {
+    let t =  new Mongodb({
+      insertMany(chunks, cb) {
+        cb('Connection error', null);
+      }
+    })
+    t.on('error', err => {
+      expect(err).equals('Connection error');
+      done();
+    });
+    t.write('{}');
+  })
+
+  it.only('Knex Transformable should throw an error if the db object is invalid', done => {
+    
+    let t =  new Knex({
+      insert(chunks) {
+        return this;
+      },
+      returning(columns) {
+        return new Promise( (resolve, reject) => {
+          reject('Connection error');
+        });
+      }
+    })
+    t.on('error', err => {
+      expect(err).equals('Connection error');
+      done();
+    })
+    t.write('{}');
+  })
+
+});
