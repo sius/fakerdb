@@ -1,9 +1,8 @@
-
-let { generate } = require('../')
+let { generate, replay } = require('../')
   , { Nedb, Mongodb, Knex } = require('../streams/db')
   , { DbTransform } = require('../streams/db/dbTransform')
+  , { expect } = require('chai')
   , path = require('path')
-  , { expect } = require('chai');
 
 const TOTAL = 100;
 const BLOCK_SIZE = 10;
@@ -297,4 +296,32 @@ describe("Error handling", () => {
     t.write('{}');
   })
 
+  it(`Readable stream 'replay' should fail if schema argument is 'null'`, done => {
+    try {
+      replay(null);
+    } catch (e) {
+      expect(e).equals(`schema undefined: null`);
+      done();
+    }
+  })
+  
+  it(`Readable stream 'replay' should fail if schema argument is a 'number'`, done => {
+    try {
+      replay(1);
+    } catch (e) {
+      expect(e).equals(`schema: argument type 'number' not supported`);
+      done();
+    }
+  })
+
+  it(`Readable stream 'replay' should end if schema argument is an invalid filepath`, done => {
+    replay("invalid/filepath")
+      .on('error', err => {
+        expect(`ENOENT: no such file or directory, open 'invalid/filepath'`).equals(err.message)
+      })
+      .on('end', () => {
+        done();
+      })
+      .read(1);
+  })
 });

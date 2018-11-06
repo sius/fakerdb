@@ -11,15 +11,17 @@ module.exports = function(schema, options = null) {
   if (options) {
     n = options.replay || 1;
   }
-
+  if (schema == null) {
+    throw `schema undefined: null`;
+  }
   if (typeof(schema) === 'string') {
     return new Readable({
       read(size) {
         if (0 < n--) {
           fs.readFile(schema, (err, data) => {
             if (err) {
-              console.error(err)
-              return this.push(null)
+              this.emit('error', err);
+              this.emit('end')
             }
             this.push(data);
           });
