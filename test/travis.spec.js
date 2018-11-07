@@ -288,7 +288,7 @@ describe("Error handling", () => {
       .read(1);
   })
 
-  it.only(`invalid JSON Schema should throw an error`, done => {
+  it(`invalid JSON Schema should throw an error`, done => {
 
     jsf()
       ._transform('{x:x}', 'utf-8', (err) => {
