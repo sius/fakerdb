@@ -1,4 +1,4 @@
-let { generate, replay } = require('../')
+let { generate, replay, jsf } = require('../')
   , { Nedb, Mongodb, Knex } = require('../streams/db')
   , { DbTransform } = require('../streams/db/dbTransform')
   , { expect } = require('chai')
@@ -323,5 +323,14 @@ describe("Error handling", () => {
         done();
       })
       .read(1);
+  })
+
+  it(`invalid JSON Schema should throw an error`, done => {
+
+    jsf()
+      ._transform('{x:x}', 'utf-8', (err) => {
+        expect(err).is.not.null
+        done()
+      });
   })
 });

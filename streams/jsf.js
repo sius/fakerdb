@@ -20,10 +20,12 @@ module.exports = function (options) {
     writableObjectMode: true,
 
     transform(chunk, encoding, callback) {
-
-      jsf.resolve(JSON.parse(chunk)).then(
-        value => callback(null, JSON.stringify(value)),
-        err => callback(err));
+      try {
+        jsf.resolve(JSON.parse(chunk))
+          .then(value => callback(null, JSON.stringify(value)));
+      } catch(e) {
+        callback(e)
+      }
     }
   });
 }
