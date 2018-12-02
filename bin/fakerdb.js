@@ -61,9 +61,9 @@ argv
   .coerce(['schema', 'json-schema-faker', 'output'], path.resolve)
   .command(require('./cmds/generate'))
   .demandCommand()
-  .wrap(80)
+  .wrap(100)
   .epilog('For more information about json-schema-faker, find out README at https://github.com/json-schema-faker/json-schema-faker')
-  .example("fakerdb g -s person.json -r 1000 -b 100 -o people.db", `Generate 1.000 person records into the 'people.db' file,`)
-  .example("fakerdb g -s person.json -r 1000 -b 100 --con postgresql://my_db_user:my_db_password@localhost:5432/my_db", 'Generate 1.000 person records and write them to my_db')    
-  .example("fakerdb g -s person.json -r 1000 -b 100 --col-name people --con mongodb://localhost:27017/my_db", 'Generate 1.000 person records and write them to my_db')                                                              
+  .example("fakerdb g -s examples/faker/person.json -r 1000 -b 100 -o people.db", `Generate 1.000 person records and write them to the 'people.db' file,`)
+  .example("fakerdb g -s examples/faker/person.json -r 1000 -b 100 --col-name people --con mongodb://localhost:27017/my_db", 'Generate 1.000 person records and write them to my_db')                                                              
+  .example("fakerdb g -s examples/faker/person.json -r 1000 -b 100 -t person --con postgresql://my_db_user:my_db_password@localhost:5432/my_db", 'Generate 1.000 person records and write them to my_db. The database table person must be created beforehand. For this purpose you can use knex migrations. The migrations folder can be set with the --migrations option.') 
   .argv;

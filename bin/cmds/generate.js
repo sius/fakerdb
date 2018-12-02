@@ -22,7 +22,7 @@ exports.handler =  (argv) => {
       const { MongoClient } = require('mongodb')
       MongoClient.connect(argv.con, { useNewUrlParser: true }, (err, client) => {
         if(err) {
-          return done(err);
+          console.error(err);
         }
         db = client.db().collection(argv.colName);
         generate(db, argv.schema, options)
