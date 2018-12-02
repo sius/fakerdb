@@ -1,7 +1,7 @@
 const { generate } = require('../../');
 exports.command = 'generate [options]';
 exports.aliases = ['gen', 'g'];
-exports.describe = 'Start the test data generation stream.';
+exports.describe = 'Start the test data generation.';
 exports.builder = (yargs) => { };
 exports.handler =  (argv) => {
     const options = {
