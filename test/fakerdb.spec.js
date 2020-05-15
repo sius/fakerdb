@@ -85,7 +85,8 @@ describe("fakerdb should stream faker generated data into DB", () => {
         connection: 'mongodb://localhost:27017/fakerdb',
         collection: 'people',
         options: { 
-          useNewUrlParser: true 
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
         }
       }
       , people;
